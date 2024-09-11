@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useIDContext } from './context/IDContext.js';
+import { useDatabaseContext } from './context/DatabaseContext.js';
 import './Find.css';
 
 function Find() {
+  const { setSelectedID } = useIDContext();
+  const { simulatedDatabase } = useDatabaseContext();
   const [searchQuery, setSearchQuery] = useState('');
   const [results, setResults] = useState([]);
   const navigate = useNavigate();
@@ -18,19 +22,21 @@ function Find() {
       return;
     }
 
-    // Simulated search logic - replace with actual search logic
-    const simulatedResults = [
-      { id: 1, name: "John Doe", idNumber: "20040022", location: "Library" },
-      { id: 2, name: "Jane Smith", idNumber: "21102020", location: "Cafeteria" }
-    ];
-    const filteredResults = simulatedResults.filter(item =>
+    const filteredResults = simulatedDatabase.filter(item =>
       item.name.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setResults(filteredResults);
   };
 
-  const handleResultClick = (id) => {
-    navigate(`/verify/${id}`);  // Redirect to verification page
+  const handleResultClick = (selectedItem) => {
+    setSelectedID(selectedItem);
+    navigate('/verify');  
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSearch();  // Trigger search when Enter key is pressed
+    }
   };
 
   return (
@@ -40,6 +46,7 @@ function Find() {
         type="text"
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Enter name..."
         className="search-bar"
       />
@@ -48,7 +55,7 @@ function Find() {
         {results.length > 0 ? (
           results.map(item => (
             <div key={item.id} className="result-item" 
-            onClick={() => handleResultClick(item.id)}>
+            onClick={() => handleResultClick(item)}>
               <h3>{item.name}</h3>
               <p>ID Number: {maskIdNumber(item.idNumber)}</p>
               <p>Found at: {item.location}</p>

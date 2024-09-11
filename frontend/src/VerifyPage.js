@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useIDContext } from './context/IDContext.js'
 
 function VerifyPage() {
-  const { id } = useParams();  // Get the ID from the URL
+  const { selectedID } = useIDContext();
   const [inputId, setInputId] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  // Simulated database for verification
-  const simulatedResults = [
-    { id: 1, name: "John Doe", idNumber: "20040022", location: "Library", contact: "yang@gmail.com" },
-    { id: 2, name: "Jane Smith", idNumber: "21102020", location: "Cafeteria", contact: "wayne@domain.com" }
-  ];
-
   // Function to verify the full ID
   const handleVerify = () => {
-    const selectedId = simulatedResults.find(item => item.id === parseInt(id));
-    if (selectedId && selectedId.idNumber === inputId) {
-      navigate(`/id-info/${selectedId.idNumber}`);  // Redirect to the detailed ID info page
+    if (selectedID && selectedID.idNumber === inputId) {
+      navigate(`/id-info`);  // Navigate to the ID Info page
     } else {
       setError('Invalid ID number. Please try again.');
+    }
+  };
+
+  if (!selectedID) {
+    return <p>No ID selected. Please go back to the Find page.</p>;
+  }
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleVerify();  // Trigger verify when Enter key is pressed
     }
   };
 
@@ -30,6 +34,7 @@ function VerifyPage() {
         type="text"
         value={inputId}
         onChange={(e) => setInputId(e.target.value)}
+        onKeyDown={handleKeyDown}
         placeholder="Enter the full 8-digit ID number"
         className="id-input"
       />

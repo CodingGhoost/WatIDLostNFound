@@ -1,30 +1,22 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useIDContext } from './context/IDContext.js';
 
 function IdInfoPage() {
-  const { idNumber } = useParams();
-  console.log('ID Number from URL:', idNumber);
-
-  // Simulated database with additional info
-  const simulatedResults = [
-    { id: 1, name: "John Doe", idNumber: "20040022", location: "Library", contact: "johndoe@gmail.com" },
-    { id: 2, name: "Jane Smith", idNumber: "21102020", location: "Cafeteria", contact: "janesmith@domain.com" }
-  ];
-
-  const selectedId = simulatedResults.find(item => item.idNumber === idNumber);
+  const { selectedID } = useIDContext();
 
   return (
     <div className="id-info-container">
-      {selectedId ? (
+      {selectedID ? (
         <div>
           <h2>ID Information</h2>
-          <p>Name: {selectedId.name}</p>
-          <p>ID Number: {selectedId.idNumber}</p>
-          <p>Found at: {selectedId.location}</p>
-          <p>Contact: {selectedId.contact}</p> {/* Sensitive information */}
+          <p>Name: {selectedID.name}</p>
+          <p>ID Number: {selectedID.idNumber}</p>
+          <p>Found at: {selectedID.location}</p>
+          <p>Contact: {selectedID.contact}</p> 
+          <p>Notes: {selectedID.notes}</p>
         </div>
       ) : (
-        <p>No information available for this ID.</p>
+        <p>No ID selected. Please go back to the Find page.</p>
       )}
     </div>
   );
