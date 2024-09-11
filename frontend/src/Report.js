@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useDatabaseContext } from './context/DatabaseContext'; 
 import './Report.css';
 
 function Report() {
+  const { addEntry } = useDatabaseContext();
   const [name, setName] = useState('');
   const [idNumber, setIdNumber] = useState('');
   const [location, setLocation] = useState('');
@@ -20,17 +22,19 @@ function Report() {
 
     // Clear error message and simulate form submission
     setErrorMessage('');
-    setSubmitted(true);
 
-    // Log form data (replace with API call)
-    const formData = {
+    const newReport = {
+      id: Math.random(),  // Generate a random ID
       name,
       idNumber,
       location,
       contact,
-      notes
+      notes,
     };
-    console.log('Form submitted:', formData);
+
+    addEntry(newReport);  // Add the new report to the shared database
+
+    setSubmitted(true);
 
     // Reset form fields
     setName('');
@@ -38,6 +42,12 @@ function Report() {
     setLocation('');
     setContact('');
     setNotes('');
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
+      handleSubmit(event);  // Trigger submit when Enter key is pressed
+    }
   };
 
   return (
@@ -86,7 +96,7 @@ function Report() {
             className="form-textarea"
           />
           {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Show validation error */}
-          <button type="submit" className="submit-button">Submit</button>
+          <button type="submit" className="submit-button" onKeyDown={handleKeyDown}>Submit</button>
         </form>
       )}
     </div>

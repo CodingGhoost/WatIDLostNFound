@@ -1,0 +1,22 @@
+# Dependency directories
+node_modules/
+# Output directories
+dist/
+build/
+# Mac system files
+.DS_Store
+
+# Cache files
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+/.cache/
+/coverage/
+/tmp/
+
+# IDEs and Editors
+.vscode/
+.idea/
+
+# ESLint
+.eslintcache
