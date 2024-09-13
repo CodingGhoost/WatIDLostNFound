@@ -44,11 +44,6 @@ function Report() {
     setNotes('');
   };
 
-  const handleKeyDown = (event) => {
-    if (event.key === 'Enter') {
-      handleSubmit(event);  // Trigger submit when Enter key is pressed
-    }
-  };
 
   return (
     <div className="report-container">
@@ -96,7 +91,7 @@ function Report() {
             className="form-textarea"
           />
           {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Show validation error */}
-          <button type="submit" className="submit-button" onKeyDown={handleKeyDown}>Submit</button>
+          <button type="submit" className="submit-button">Submit</button>
         </form>
       )}
     </div>
