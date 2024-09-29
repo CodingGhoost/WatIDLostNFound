@@ -12,7 +12,7 @@ function Find() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch('https://wat-id-lost-and-found.herokuapp.com/api/lost-items')
+    fetch('https://wat-id-lost-and-found-76d3e835a4fd.herokuapp.com/api/lost-items')
       .then((response) => {
         if (!response.ok) {
           throw new Error('Failed to fetch lost items');
