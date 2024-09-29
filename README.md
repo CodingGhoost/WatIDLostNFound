@@ -21,11 +21,19 @@
 ### Prerequisites
 
 - **Node.js** (v14 or higher)
-- **NPM** or **Yarn**
-- **PostgreSQL** (for local development, or use Heroku Postgres for production)
+- **NPM**
+- **PostgreSQL**
 
 ### Clone the Repository
 
 ```bash
 git clone https://github.com/CodingGhoost/WatIDLostNFound.git
 cd WatIDLostNFound
+```
+
+### Access Website
+
+```bash
+cd frontend
+npm start
+```
