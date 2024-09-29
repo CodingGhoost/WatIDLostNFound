@@ -11,7 +11,7 @@ function VerifyPage() {
 
   // Function to verify the full ID
   const handleVerify = () => {
-    if (selectedID && selectedID.idNumber === inputId) {
+    if (selectedID && selectedID.id_number === inputId) {
       navigate(`/id-info`);  // Navigate to the ID Info page
     } else {
       setError('Invalid ID number. Please try again.');

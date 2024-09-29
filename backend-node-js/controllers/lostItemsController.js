@@ -11,16 +11,16 @@ exports.getAllLostItems = async (req, res) => {
 };
 
 exports.addLostItem = async (req, res) => {
-  const { id, id_name, id_number, location, contact, notes } = req.body;
+  const { id_name, id_number, location, contact, notes } = req.body;
 
   try {
     const result = await pool.query(
-      'INSERT INTO lost_items (id, id_name, id_number, location, contact, notes) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
-      [id, id_name, id_number, location, contact, notes]
+      'INSERT INTO lost_items (id_name, id_number, location, contact, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *',
+      [id_name, id_number, location, contact, notes]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error(err);
+    console.error('Error saving lost item:', err);  // Log the error
     res.status(500).send('Server Error');
   }
 };

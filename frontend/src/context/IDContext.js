@@ -1,14 +1,14 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
-// Create the IDContext
+// Create the context
 const IDContext = createContext();
 
-// Custom hook to access the context easily
+// Custom hook to use the context
 export const useIDContext = () => useContext(IDContext);
 
-// Provider component to wrap your app
+// Context provider to wrap around the app
 export const IDProvider = ({ children }) => {
-  const [selectedID, setSelectedID] = useState(null);  // Store selected ID info
+  const [selectedID, setSelectedID] = useState(null);
 
   return (
     <IDContext.Provider value={{ selectedID, setSelectedID }}>

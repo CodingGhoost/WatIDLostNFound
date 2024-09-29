@@ -1,47 +1,58 @@
 import React, { useState } from 'react';
-import { useDatabaseContext } from '../context/DatabaseContext'; 
 import '../styles/Report.css';
 
 function Report() {
-  const { addEntry } = useDatabaseContext();
-  const [name, setName] = useState('');
-  const [idNumber, setIdNumber] = useState('');
+  const [id_name, setName] = useState('');
+  const [id_number, setIdNumber] = useState('');
   const [location, setLocation] = useState('');
   const [contact, setContact] = useState('');
   const [notes, setNotes] = useState('');
   const [submitted, setSubmitted] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (idNumber.length !== 8 || isNaN(idNumber)) {
+    if (id_number.length !== 8 || isNaN(id_number)) {
       setErrorMessage('ID number must be an 8-digit number.');
       return;
     }
 
     // Clear error message and simulate form submission
-    setErrorMessage('');
-
-    const newReport = {
-      id: Math.random(),  // Generate a random ID
-      name,
-      idNumber,
-      location,
-      contact,
-      notes,
+    const reportData = {
+      id_name: id_name,
+      id_number: id_number,
+      location: location,
+      contact: contact,
+      notes: notes
     };
 
-    addEntry(newReport);  // Add the new report to the shared database
+    try {
+      // Send the data to the backend API
+      const response = await fetch('/api/lost-items', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(reportData)
+      });
 
-    setSubmitted(true);
+      if (!response.ok) {
+        throw new Error('Failed to submit report');
+      }
 
-    // Reset form fields
-    setName('');
-    setIdNumber('');
-    setLocation('');
-    setContact('');
-    setNotes('');
+      setSubmitted(true);
+
+      setName('');
+      setIdNumber('');
+      setLocation('');
+      setContact('');
+      setNotes('');
+
+    } catch (error) {
+      console.error('Error submitting report:', error);
+      setErrorMessage('Failed to submit report. Please try again later.');
+    }
   };
 
 
@@ -54,7 +65,7 @@ function Report() {
         <form onSubmit={handleSubmit}>
           <input
             type="text"
-            value={name}
+            value={id_name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Name"
             className="form-input"
@@ -62,7 +73,7 @@ function Report() {
           />
           <input
             type="text"
-            value={idNumber}
+            value={id_number}
             onChange={(e) => setIdNumber(e.target.value)}
             placeholder="ID Number"
             className="form-input"

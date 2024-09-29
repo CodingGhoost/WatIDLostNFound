@@ -6,51 +6,48 @@ import Report from './pages/Report';
 import VerifyPage from './pages/VerifyPage';
 import IdInfoPage from './pages/IdInfoPage';
 import { IDProvider } from './context/IDContext.js';
-import { DatabaseProvider } from './context/DatabaseContext';
 import flagIcon from './icons/flag.png';
 import searchIcon from './icons/search.png';
 
 function App() {
   return (
-    <DatabaseProvider>
-      <IDProvider>
-        <Router>
-          <div className="App">
-            <header className="App-header">
-              <nav>
-                <NavLink 
-                  exact 
-                  to="/" 
-                  className={({ isActive }) => isActive ? "active-link" : ""}
-                >
-                  Home
-                </NavLink>
-                <NavLink 
-                  to="/find" 
-                  className={({ isActive }) => isActive ? "active-link" : ""}
-                >
-                  Find
-                </NavLink>
-                <NavLink 
-                  to="/report" 
-                  className={({ isActive }) => isActive ? "active-link" : ""}
-                >
-                  Report
-                </NavLink>
-              </nav>
-            </header>
+    <IDProvider>
+      <Router>
+        <div className="App">
+          <header className="App-header">
+            <nav>
+              <NavLink 
+                exact 
+                to="/" 
+                className={({ isActive }) => isActive ? "active-link" : ""}
+              >
+                Home
+              </NavLink>
+              <NavLink 
+                to="/find" 
+                className={({ isActive }) => isActive ? "active-link" : ""}
+              >
+                Find
+              </NavLink>
+              <NavLink 
+                to="/report" 
+                className={({ isActive }) => isActive ? "active-link" : ""}
+              >
+                Report
+              </NavLink>
+            </nav>
+          </header>
 
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/find" element={<Find />} />
-              <Route path="/report" element={<Report />} />
-              <Route path="/verify/" element={<VerifyPage />} />
-              <Route path="/id-info/" element={<IdInfoPage />} />
-            </Routes>
-          </div>
-        </Router>
-      </IDProvider>
-    </DatabaseProvider>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/find" element={<Find />} />
+            <Route path="/report" element={<Report />} />
+            <Route path="/verify/" element={<VerifyPage />} />
+            <Route path="/id-info/" element={<IdInfoPage />} />
+          </Routes>
+        </div>
+      </Router>
+    </IDProvider>
   );
 }
 

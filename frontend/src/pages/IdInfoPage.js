@@ -10,8 +10,8 @@ function IdInfoPage() {
       {selectedID ? (
         <div>
           <h2>ID Information</h2>
-          <p>Name: {selectedID.name}</p>
-          <p>ID Number: {selectedID.idNumber}</p>
+          <p>Name: {selectedID.id_name}</p>
+          <p>ID Number: {selectedID.id_number}</p>
           <p>Found at: {selectedID.location}</p>
           <p>Contact: {selectedID.contact}</p> 
           <p>Notes: {selectedID.notes}</p>
