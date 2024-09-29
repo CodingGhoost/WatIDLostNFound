@@ -29,7 +29,7 @@ function Report() {
 
     try {
       // Send the data to the backend API
-      const response = await fetch('/api/lost-items', {
+      const response = await fetch('https://wat-id-lost-and-found.herokuapp.com/api/lost-items', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
