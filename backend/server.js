@@ -1,5 +1,5 @@
 const express = require('express');
-const pool = require('./db');  // Assuming your db config is in db.js
+const pool = require('./config/db');  
 
 const app = express();
 const port = process.env.PORT || 5000;  // Use the Heroku-assigned port or default to 5000 for local development
