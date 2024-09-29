@@ -7,6 +7,7 @@
 ### Features
 
 - Search for lost IDs by name.
+- Verify using a comlete ID number and view retrieval information.
 - Submit lost ID reports, including ID number, name, contact, and additional notes.
 
 ## Tech Stack
@@ -16,13 +17,12 @@
 - **Database:** PostgreSQL (hosted on Heroku)
 - **Deployment:** Heroku
 
-## Installation and Setup
+## How to Use
 
 ### Prerequisites
 
 - **Node.js** (v14 or higher)
 - **NPM**
-- **PostgreSQL**
 
 ### Clone the Repository
 
