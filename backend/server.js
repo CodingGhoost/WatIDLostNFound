@@ -22,11 +22,6 @@ app.get('/api/lost-items', async (req, res) => {
 app.post('/api/lost-items', async (req, res) => {
   const { id_name, id_number, location, contact, notes } = req.body;
 
-  // Check if required fields are provided
-  if (!id_name || !id_number || contact) {
-    return res.status(400).json({ error: "Name and ID number are required" });
-  }
-
   try {
     const result = await pool.query(
       'INSERT INTO lost_items (id_name, id_number, location, contact, notes) VALUES ($1, $2, $3, $4, $5) RETURNING *',
