@@ -1,5 +1,7 @@
 # Wat-ID Lost and Found
 
+## Update on Oct. 6: Currently not available due to Heroku service termination
+
 ## Overview
 
 **Wat-ID Lost and Found** is a web application that allows users to report and search for lost ID cards at the University of Waterloo. It helps streamline the process of finding and reporting lost IDs by providing a simple interface for submitting lost items and searching for them.
