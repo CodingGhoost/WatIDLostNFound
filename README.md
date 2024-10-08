@@ -1,6 +1,6 @@
 # Wat-ID Lost and Found
 
-## Update on Oct. 6: Currently not available due to Heroku service termination
+## Update on Oct. 8: Data manipulation currently not available due to Heroku service termination. Frontend components work fine:)
 
 ## Overview
 
